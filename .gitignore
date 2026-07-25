@@ -7,6 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+id_ed25519_work
+id_ed25519_work.pub
+
+
 node_modules
 dist
 dist-ssr
