@@ -6,6 +6,9 @@ const playCelebrationSound = () => {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!AudioContext) return;
   const ctx = new AudioContext();
+  if (ctx.state === 'suspended') {
+    ctx.resume();
+  }
 
   // 1. The POP!
   const popOsc = ctx.createOscillator();
@@ -140,7 +143,7 @@ const OpeningEnvelope = ({ onOpen }) => {
 
       {/* Envelope / Curtain Reveal logic */}
       <motion.div 
-        className="relative w-[90%] max-w-md aspect-[3/4] flex items-center justify-center perspective-[1000px]"
+        className="relative w-[90%] max-w-md p-2 md:p-3 perspective-[1000px] mx-auto"
       >
         {/* Left Door / Curtain */}
         <motion.div
@@ -165,7 +168,7 @@ const OpeningEnvelope = ({ onOpen }) => {
 
         {/* Center Invitation Card */}
         <motion.div 
-          className="absolute inset-2 bg-white rounded-xl shadow-inner p-8 flex flex-col items-center justify-center text-center border-4 border-double border-[var(--color-gold-light)]"
+          className="relative w-full bg-white rounded-xl shadow-inner p-6 md:p-10 flex flex-col items-center justify-center text-center border-4 border-double border-[var(--color-gold-light)]"
           style={{ zIndex: 20 }}
           animate={{
             scale: isOpening ? 1.2 : 1,
@@ -178,12 +181,13 @@ const OpeningEnvelope = ({ onOpen }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
+            className="w-full flex flex-col items-center justify-center"
           >
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.8, type: "spring" }}
-              className="flex justify-center mb-6"
+              className="flex justify-center mb-4 md:mb-6"
             >
               <img 
                 src="/vedant-logo.jpeg" 
@@ -192,17 +196,17 @@ const OpeningEnvelope = ({ onOpen }) => {
               />
             </motion.div>
 
-            <h3 className="text-sm tracking-[0.3em] uppercase text-[var(--color-gold)] mb-4 font-semibold">
+            <h3 className="text-xs md:text-sm tracking-[0.3em] uppercase text-[var(--color-gold)] mb-2 md:mb-4 font-semibold">
               You're Invited
             </h3>
-            <h1 className="text-4xl md:text-5xl font-serif text-[var(--color-chocolate)] mb-2 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-serif text-[var(--color-chocolate)] mb-2 leading-tight">
               Grand Opening
             </h1>
-            <div className="h-[1px] w-16 bg-[var(--color-gold)] mx-auto my-6"></div>
-            <h2 className="text-xl md:text-2xl font-serif text-[var(--color-chocolate)] mb-6">
+            <div className="h-[1px] w-16 bg-[var(--color-gold)] mx-auto my-4 md:my-6"></div>
+            <h2 className="text-lg md:text-2xl font-serif text-[var(--color-chocolate)] mb-4 md:mb-6">
               Vedant Enterprises
             </h2>
-            <p className="text-sm text-gray-500 tracking-wider mb-12">
+            <p className="text-xs md:text-sm text-gray-500 tracking-wider mb-6 md:mb-12">
               Cake Wholesale Material Store
             </p>
           </motion.div>
@@ -212,9 +216,22 @@ const OpeningEnvelope = ({ onOpen }) => {
               onClick={handleOpen}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative px-8 py-3 bg-[var(--color-chocolate)] text-[var(--color-cream)] rounded-full text-sm tracking-widest uppercase overflow-hidden group shadow-[0_0_20px_rgba(74,37,17,0.3)]"
+              animate={{
+                boxShadow: ["0px 0px 10px rgba(212,175,55,0.4)", "0px 0px 25px rgba(212,175,55,0.8)", "0px 0px 10px rgba(212,175,55,0.4)"]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="relative px-8 py-3 md:py-4 bg-gradient-to-r from-[var(--color-chocolate)] to-[#6a3b22] text-[var(--color-cream)] rounded-full text-xs md:text-sm tracking-widest uppercase overflow-hidden group mt-4"
             >
-              <span className="relative z-10 font-semibold">Tap to Open Invitation</span>
+              <span className="relative z-10 font-bold tracking-[0.2em] flex items-center gap-2">
+                TAP TO OPEN
+                <motion.span 
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="inline-block"
+                >
+                  →
+                </motion.span>
+              </span>
               <motion.div 
                 className="absolute inset-0 bg-[var(--color-gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               />
