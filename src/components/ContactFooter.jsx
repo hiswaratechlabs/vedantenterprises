@@ -79,9 +79,14 @@ const ContactFooter = () => {
         </div>
 
         <div className="pt-8 border-t border-white/10 text-center flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-400 font-light">
-            © {new Date().getFullYear()} Vedant Enterprises. All rights reserved.
-          </p>
+          <div className="flex flex-col md:text-left gap-2">
+            <p className="text-sm text-gray-400 font-light">
+              © {new Date().getFullYear()} Vedant Enterprises. All rights reserved.
+            </p>
+            <p className="text-xs text-gray-500 font-light">
+              Digitally baked with magic by <a href="tel:9049261203" className="text-[var(--color-gold)] hover:text-white transition-colors font-medium">HiSwaratechlabs</a> (9049261203)
+            </p>
+          </div>
           <motion.button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             whileHover={{ y: -3 }}
