@@ -84,7 +84,7 @@ const ContactFooter = () => {
               © {new Date().getFullYear()} Vedant Enterprises. All rights reserved.
             </p>
             <p className="text-xs text-gray-500 font-light">
-              Digitally baked with magic by <a href="tel:9049261203" className="text-[var(--color-gold)] hover:text-white transition-colors font-medium">HiSwaratechlabs</a> (9049261203)
+              Digitally baked with magic by <a href="tel:9049261203" className="text-[var(--color-gold)] hover:text-white transition-colors font-medium">HiSwaraTechLabs</a> (9049261203)
             </p>
           </div>
           <motion.button 
